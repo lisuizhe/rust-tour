@@ -1,11 +1,12 @@
 use super::method::{Method, MethodError};
-use super::{QueryString, QueryStringValue};
+use super::{QueryString};
 use std::convert::TryFrom;
 use std::error::Error;
 use std::fmt::{Display, Formatter, Result as FmtResult, Debug};
 use std::str;
 use std::str::Utf8Error;
 
+#[derive(Debug)]
 pub struct Request<'buf> {
     path: &'buf str,
     query_string: Option<QueryString<'buf>>,
@@ -43,7 +44,6 @@ impl<'buf> TryFrom<&'buf [u8]> for Request<'buf> {
 }
 
 fn get_next_word(request: &str) -> Option<(&str, &str)> {
-    let mut iter = request.chars();
     for (i, c) in request.chars().enumerate() {
         if c == ' ' || c == '\r' {
             return Some((&request[..i], &request[i+1..]));
