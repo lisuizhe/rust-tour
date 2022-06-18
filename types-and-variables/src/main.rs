@@ -1,6 +1,6 @@
 use std::mem;
 
-fn main() {
+fn fundamental_data_types() {
     // unsigned 0..255
     let a: u8 = 123; // 8bits
     println!("a = {}", a);
@@ -33,4 +33,7 @@ fn main() {
 
     let f = false;
     println!("f = {}, size = {} bytes", f, mem::size_of_val(&f));
+}
+fn main() {
+    fundamental_data_types();
 }
